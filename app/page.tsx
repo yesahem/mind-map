@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [analytics, setAnalytics] = useState<any>(null);
+  
 
   useEffect(() => {
     async function fetchAnalytics() {
-      const res = await fetch("/api/analytics/");
+      const res = await fetch("/api/analytics");
       const data = await res.json();
+      console.log(data)
       setAnalytics(data);
     }
 
@@ -23,11 +25,7 @@ export default function Home() {
 
       <h2>Engagement Metrics:</h2>
       <ul>
-        {analytics.analysis.map((item: any) => (
-          <li key={item.postType}>
-            <strong>{item.postType}:</strong> Avg Likes: {item.averageLikes}, Avg Comments: {item.averageComments}
-          </li>
-        ))}
+        {/* {data} */}
       </ul>
 
       <h2>Insights:</h2>
