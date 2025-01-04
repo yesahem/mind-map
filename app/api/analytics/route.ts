@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 // import { analyzeData } from "../../../scripts/analyzeData";
-import { generateInsights } from "../../../scripts/generateInsights";
+import { generateInsights } from "@/scripts/generateInsights";
 import { engagementData } from "@/scripts/engagementData";
 
 export async function GET(req: NextRequest) {
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({insights });
   } catch (error) {
-    console.error("Error in API:", error);
+    // console.error("Error in API:", error);
     return NextResponse.json({ error: "Failed to fetch analytics" }, { status: 500 });
   }
 }

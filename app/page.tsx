@@ -7,7 +7,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchAnalytics() {
-      const res = await fetch("/api/analytics");
+      const res = await fetch("/api/analytics/");
       const data = await res.json();
       setAnalytics(data);
     }

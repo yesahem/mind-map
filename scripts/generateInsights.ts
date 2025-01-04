@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import "dotenv/config";
-import { engagementData } from "./engagementData";
+import { engagementData } from "@/scripts/engagementData";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API,
@@ -20,7 +20,7 @@ export const generateInsights = async function (analysis: any) {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
-        { role: "system", content: "You are a helpful assistant." },
+        { role: "system", content: "You are a helpful assistant. Help me analysie the following data into a beautiful user readable and summarised format, Just tell me which content attracts higher engament followed by other post formats " },
         {
             role: "user",
             content:  prompt,
@@ -30,7 +30,7 @@ export const generateInsights = async function (analysis: any) {
     });
 
     console.log("Generated Insights:", response.choices[0]);
-    return response.choices[0];
+    return response.choices[0].message.content;
   } catch (error) {
     console.error("Error generating insights:", error);
     throw error;
