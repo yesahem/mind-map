@@ -3,7 +3,7 @@ import "dotenv/config";
 import { engagementData } from "@/scripts/engagementData";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export const generateInsights = async function (analysis: any) {
@@ -20,12 +20,16 @@ export const generateInsights = async function (analysis: any) {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages: [
-        { role: "system", content: "You are a helpful assistant. Help me analysie the following data into a beautiful user readable and summarised format, Just tell me which content attracts higher engament followed by other post formats " },
         {
-            role: "user",
-            content:  prompt,
+          role: "system",
+          content:
+            "You are a helpful assistant. Help me analysie the following data into a beautiful user readable and summarised format, Just tell me which content attracts higher engament followed by other post formats ",
         },
-    ],
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
       max_tokens: 200,
     });
 

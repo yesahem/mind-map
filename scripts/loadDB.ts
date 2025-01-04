@@ -1,15 +1,14 @@
 import { DataAPIClient } from "@datastax/astra-db-ts";
-import { PuppeteerWebBaseLoader } from "@langchain/community/document_loaders/web/puppeteer";
-import OpenAI from "openai";
+
 import fs from "fs";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+
 
 import "dotenv/config";
 import { log } from "console";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API,
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API,
+// });
 
 const dbClient = new DataAPIClient(process.env.ASTRA_DB_TOKEN);
 const db = dbClient.db(process.env.ASTRA_DB_API!);
