@@ -13,28 +13,29 @@ export const generateInsights = async function (analysis: any) {
       ${JSON.stringify(analysis)}
 
       Examples:
-      - Carousel posts have higher engagement than static posts.
-      - Reels drive more comments compared to other formats.
+      - Reels posts have 20% higher engagement than static posts.
+      - Reels drive 2x more comments compared to other formats.
     `;
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
+
       messages: [
         {
           role: "system",
           content:
-            "You are a helpful assistant. Help me analysie the following data into a beautiful user readable and summarised format, Just tell me which content attracts higher engament followed by other post formats ",
+            "You are a helpful assistant. Help me analysie the following data into a beautiful summarised format and compare the results with other formats and then give me the results in percentage of engagement interaction in array of JSON format only no text strictly no text other than array of json and please trim down all he unnecessary things and return me array of objects strictly ,  tell me which content attracts higher engament followed by other post formats in JSON format The Json Response i want is of format: {post_type, engagement_rate} ",
         },
         {
           role: "user",
           content: prompt,
         },
       ],
-      max_tokens: 200,
+      // max_tokens: 200,
     });
 
-    console.log("Generated Insights:", response.choices[0]);
-    return response.choices[0].message.content;
+    console.log(response.choices[0].message.content);
+    return response.choices[0].message.content!;
   } catch (error) {
     console.error("Error generating insights:", error);
     throw error;
