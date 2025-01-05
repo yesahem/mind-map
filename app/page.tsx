@@ -33,8 +33,8 @@ export default function Home() {
 
       <h2>Insights:</h2>
       <p>
-        {analytics.map((ele) => (
-          <div>
+        {analytics.map((ele, index: number) => (
+          <div key={index}>
             {ele.post_type} : {ele.engagement_rate}
           </div>
         ))}
