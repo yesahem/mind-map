@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [analytics, setAnalytics] = useState<any>([]);
+  interface elementType {
+    post_type: string;
+    engagement_rate: string;
+  }
 
   useEffect(() => {
     async function fetchAnalytics() {
@@ -33,7 +37,7 @@ export default function Home() {
 
       <h2>Insights:</h2>
       <p>
-        {analytics.map((ele, index: number) => (
+        {analytics.map((ele: elementType, index: number) => (
           <div key={index}>
             {ele.post_type} : {ele.engagement_rate}
           </div>
