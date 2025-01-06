@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   const [analytics, setAnalytics] = useState<any>([]);
+  const[loading, setLoading] = useState(true)
   interface elementType {
     post_type: string;
     engagement_rate: string;
@@ -16,14 +17,14 @@ export default function Home() {
       // console.log(data)
       console.log("data Type", typeof data);
       setAnalytics(data);
-
+      setLoading(false)
       // console.log(analytics)
     }
 
     fetchAnalytics();
   }, []);
 
-  if (!analytics) return <p>Loading...</p>;
+  
   {
     console.log(analytics);
   }
@@ -31,18 +32,13 @@ export default function Home() {
   return (
     <div>
       <h1>Social Media Analytics</h1>
-
-      <h2>Engagement Metrics:</h2>
-      <ul>{/* {data} */}</ul>
-
-      <h2>Insights:</h2>
-      <p>
+      <br />
+      {loading ? <div>Generating Insights</div>: <p>
         {analytics.map((ele: elementType, index: number) => (
           <div key={index}>
-            {ele.post_type} : {ele.engagement_rate}
-          </div>
+            {ele.post_type} : {ele.engagement_rate}x more enagaging than static images        </div>
         ))}
-      </p>
+      </p>}
     </div>
   );
 }
